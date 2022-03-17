@@ -1,0 +1,45 @@
+body {
+  font: 1.5em "Fira Sans", sans-serif;
+  box-sizing: border-box;
+}
+header {
+  height: 100px;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 10px;
+}
+.btn-cart {
+  width: 100px;
+  height: 50px;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.product-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 10%;
+  margin: 20px;
+  height: auto;
+  width: 170px;
+  padding: 10px;
+}
+.product-item h3 {
+  border: 1px solid black;
+  height: auto;
+  padding: 5px;
+}
+.buy-btn {
+  height: 30px;
+}
+.buy-btn:hover {
+  background-color: beige;
+  border-radius: 20%;
+}
