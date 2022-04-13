@@ -1,0 +1,75 @@
+<meta charset="utf-8" />
+<script>
+  class Hamburger {
+    constructor(size = "small", stuffing = "cheese") {
+      sizes.forEach((item) => {
+        if (item.name === size) this.size = item;
+      });
+      stuffings.forEach((item) => {
+        if (item.name === stuffing) this.stuffing = item;
+      });
+
+      this.order = [this.size, this.stuffing];
+    }
+    addTopping(topping) {
+      toppings.forEach((item) => {
+        if (item.name === topping) this.order.push(item);
+      });
+    }
+    getToppings() {
+      toppings.forEach((item) => console.log(item.name));
+    }
+    removeTopping(topping) {
+      if (order.length > 2) this.order.pop();
+    }
+    getSize() {
+      console.log(this.size.name);
+    }
+    getStuffing() {
+      console.log(this.stuffing.name);
+    }
+    calculatePrice() {
+      this.price = 0;
+      this.order.forEach((item) => {
+        this.price += item.price;
+      });
+      console.log(
+        `${this.price} цена ${this.size.name} гамбургера с ${this.stuffing.name}`
+      );
+    }
+    calculateCalories() {
+      this.kkal = 0;
+      this.order.forEach((item) => {
+        this.kkal += item.kkal;
+      });
+      console.log(
+        `${this.kkal} килокаллории ${this.size.name} гамбургера с ${this.stuffing.name}`
+      );
+    }
+  }
+
+  let sizes = [
+    { name: "big", price: 100, kkal: 40 },
+    { name: "small", price: 50, kkal: 20 },
+  ];
+
+  let stuffings = [
+    { name: "cheese", price: 10, kkal: 20 },
+    { name: "salad", price: 20, kkal: 5 },
+    { name: "potato", price: 15, kkal: 10 },
+  ];
+  let toppings = [
+    { name: "spice", price: 15, kkal: 0 },
+    { name: "mayonnaise", price: 20, kkal: 5 },
+  ];
+  let bigHamburgerCheese = new Hamburger("big", "cheese");
+  bigHamburgerCheese.getToppings();
+  bigHamburgerCheese.addTopping("spice");
+  bigHamburgerCheese.getSize();
+  bigHamburgerCheese.getStuffing();
+  bigHamburgerCheese.calculatePrice();
+  bigHamburgerCheese.calculateCalories();
+  let smallHamburger = new Hamburger("small", "salad");
+  smallHamburger.calculateCalories();
+  smallHamburger.calculatePrice();
+</script>
