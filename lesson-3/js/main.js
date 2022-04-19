@@ -31,14 +31,13 @@ class ProductsList {
   }
 }
 
-class ProductItem {
-  constructor(product, img = "https://via.placeholder.com/200x150") {
+class Item {
+  constructor(product, img) {
     this.title = product.product_name;
     this.price = product.price;
     this.id = product.id_product;
     this.img = img;
   }
-
   render() {
     return `<div class="product-item" data-id="${this.id}">
                 <img src="${this.img}" alt="Some img">
@@ -51,10 +50,16 @@ class ProductItem {
   }
 }
 
+class ProductItem extends Item {
+  constructor(product, img = "https://via.placeholder.com/200x150") {
+    super(product, img);
+  }
+}
+
 class Basket {
   constructor(container = ".basket") {
     this.container = container;
-    this.goods = []; //массив товаров из JSON документа
+    this.goods = [];
     this._getBasket().then((data) => {
       //data - объект js
 
@@ -139,13 +144,10 @@ class Basket {
   }
 }
 
-class ElemBasket {
+class ElemBasket extends Item {
   constructor(product, img = "https://via.placeholder.com/100x100") {
-    this.title = product.product_name;
-    this.price = product.price;
-    this.id = product.id_product;
+    super(product, img);
     this.quantity = product.quantity;
-    this.img = img;
   }
   render() {
     return `<div class="basket-item" data-id="${this.id}">
@@ -168,4 +170,31 @@ document.querySelector(".btn-cart").addEventListener("click", () => { let
 basketMenu = document.querySelector(".basket"); basketMenu.style.visibility ===
 "hidden" ? (basketMenu.style.visibility = "visible") :
 (basketMenu.style.visibility = "hidden"); }); let list = new ProductsList(); let
-buy = new Basket(); }; */
+buy = new Basket(); }; 
+
+
+ addToBasket() {
+    fetch(`${API}/addToBasket.json`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        //console.log(data);
+        if (data.result == 1) {
+          const buyBtn = document.querySelectorAll(".buy-btn");
+          buyBtn.forEach((item) => {
+            item.addEventListener("click", () => {
+              const basketGoods = document.querySelector(".basket");
+              basketGoods.append(item.parentNode);
+
+              item.classList.toggle("buy-btn");
+              item.classList.add("buy_btn__del");
+              item.innerHTML = "X";
+            });
+          });
+        } else {
+          return;
+        }
+      })
+      .catch((err) => console.log(err));
+  } */
